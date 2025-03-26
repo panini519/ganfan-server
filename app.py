@@ -40,3 +40,25 @@ def index():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
+
+@app.route('/view', methods=['GET'])
+def view_data():
+    if not os.path.isfile(DATA_FILE):
+        return "<h2>暂无干饭数据～</h2>"
+
+    with open(DATA_FILE, encoding='utf-8') as f:
+        rows = list(csv.reader(f))
+
+    if not rows:
+        return "<h2>暂无干饭数据～</h2>"
+
+    headers = rows[0]
+    data_rows = rows[1:]
+
+    table = "<table border='1' cellpadding='6' style='border-collapse: collapse;'>"
+    table += "<thead><tr>" + "".join(f"<th>{h}</th>" for h in headers) + "</tr></thead><tbody>"
+    for row in data_rows:
+        table += "<tr>" + "".join(f"<td>{cell}</td>" for cell in row) + "</tr>"
+    table += "</tbody></table>"
+
+    return f"<h2>🍚 干饭数据展示</h2>{table}"
