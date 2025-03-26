@@ -38,9 +38,6 @@ def submit():
 def index():
     return '✅ 干饭后端在线，正在监听 POST /submit 🍚'
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
-
 @app.route('/view', methods=['GET'])
 def view_data():
     if not os.path.isfile(DATA_FILE):
@@ -62,3 +59,8 @@ def view_data():
     table += "</tbody></table>"
 
     return f"<h2>🍚 干饭数据展示</h2>{table}"
+    
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
+
+
