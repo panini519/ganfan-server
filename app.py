@@ -60,7 +60,10 @@ def view_data():
 
     return f"<h2>🍚 干饭数据展示</h2>{table}"
     
+import os
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
 
 
